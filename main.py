@@ -200,6 +200,7 @@ class TextEditor:
                 ip_address = requests.get("https://api.ipify.org").text
                 link = f"{ip_address}:{port}"
                 labeltwo.config(text=link)
+                # put adress:port to the clipboard
                 window.clipboard_clear()
                 window.clipboard_append(link)
                 window.update()
