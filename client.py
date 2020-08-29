@@ -11,9 +11,11 @@ class ConnectTo(Thread):
         self.content = self.label.get("1.0", "end")
         self.host = host
         self.port = port
+        self.connected=False
 
     async def tcp_echo_client(self, host, port):
         reader, writer = await asyncio.open_connection(host, port)
+        self.connected=True
         self.writer = writer
         # thread = Thread(target=self.send_msg, args=(writer,))
         # thread.start()

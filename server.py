@@ -7,15 +7,16 @@ class HostTo(Thread):
         Thread.__init__(self)
         self.label = label
         self.content = self.label.get("1.0", "end")
-        self.host = "127.0.0.1"
+        self.host = "0.0.0.0"
         self.port = port
+        self.connected=False
 
     async def main(self):
         server = await asyncio.start_server(self.handle_echo, self.host, 8888)
 
         addr = server.sockets[0].getsockname()
         print(f"Serving on {addr}")
-
+        self.connected=True
         async with server:
             await server.serve_forever()
 

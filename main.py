@@ -270,12 +270,12 @@ class TextEditor:
         window.destroy()
 
     def text_changed(self, key):
-        if self.con or self.host:
+        if self.con.connected or self.host.connected:
             new_text = self.textarea.get("1.0", "end")
             new_text = new_text.strip() + key.char
-            if self.con and not self.host:
+            if self.con.connected and not self.host:
                 self.con.send_msg(new_text)
-            elif self.host and not self.con:
+            elif self.host.connected and not self.con:
                 self.host.send_msg(new_text)
 
 
