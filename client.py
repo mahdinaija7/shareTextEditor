@@ -11,12 +11,13 @@ class ConnectTo(Thread):
         self.content = self.label.get("1.0", "end")
         self.host = host
         self.port = port
-        self.connected=False
+        self.connected = False
 
     async def tcp_echo_client(self, host, port):
         reader, writer = await asyncio.open_connection(host, port)
-        self.connected=True
+        self.connected = True
         self.writer = writer
+        self.send_msg("testing")
         # thread = Thread(target=self.send_msg, args=(writer,))
         # thread.start()
         while True:
@@ -25,10 +26,10 @@ class ConnectTo(Thread):
             if recived_message:
                 self.label.delete(1.0, "end")
                 self.label.insert(1.0, recived_message)
-    #called when textarea
+
+    # called when textarea
     def send_msg(self, new_content):
         self.writer.write(new_content.encode())
-
 
     def run(self):
         asyncio.run(self.tcp_echo_client(self.host, self.port))
