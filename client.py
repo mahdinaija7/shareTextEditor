@@ -17,7 +17,7 @@ class ConnectTo(Thread):
         reader, writer = await asyncio.open_connection(host, port)
         self.connected = True
         self.writer = writer
-        self.send_msg("testing")
+        self.send_msg("a")
         # thread = Thread(target=self.send_msg, args=(writer,))
         # thread.start()
         while True:

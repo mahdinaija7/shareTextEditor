@@ -12,7 +12,7 @@ class HostTo(Thread):
         self.connected = False
 
     async def main(self):
-        server = await asyncio.start_server(self.handle_echo, self.host, 8888)
+        server = await asyncio.start_server(self.handle_echo, self.host, self.port)
 
         addr = server.sockets[0].getsockname()
         print(f"Serving on {addr}")

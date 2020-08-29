@@ -1,10 +1,13 @@
 import tkinter as tk
-import socket
 import winsound
+import requests
 from tkinter import filedialog
 from functools import partial
 from client import ConnectTo
 from server import HostTo
+
+
+API_IP_URL = "https://api.ipify.org"
 
 
 class TextEditor:
@@ -194,8 +197,7 @@ class TextEditor:
             port = portEntry.get()
             if port and port.isnumeric():
                 labelone.config(text="here is your link")
-                hostname = socket.gethostname()
-                ip_address = socket.gethostbyname(hostname)
+                ip_address = requests.get("https://api.ipify.org").text
                 link = f"{ip_address}:{port}"
                 labeltwo.config(text=link)
                 window.clipboard_clear()
